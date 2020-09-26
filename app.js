@@ -44,7 +44,7 @@
     app.use('/', express.static(__dirname +'/client') );
 
 
-    const port = 8080;
+    const port = process.env.PORT || 8080
     Server.listen(port);
     console.log(`Server Started at Port ${port}`)
 
