@@ -1,0 +1,123 @@
+    
+    
+    .button-grid button:hover{
+        cursor: pointer;
+        color: white;
+        background-color: black;
+        border: 5px solid black;
+    }
+
+
+    .level-container{
+        font-family: Palatino, fantasy;
+    }
+
+
+    .pill-s-animate{
+        display: inline-flex;
+    }
+
+    .wall-HUR{    /*  -  */
+        background-image: url('../components/assets/walls/Wall_0004_close-Top-horizontal2-copy.png');
+    }
+
+    .wall-HUL{   
+        background-image: url('../components/assets/walls/Wall_0005_close-Top-horizontal1-copy.png');
+    }
+    .wall-HUO{
+        background-image: url('../components/assets/walls/Wall_0017_horizontal-01.png');
+    }
+    .wall-HDR{
+        background-image: url('../components/assets/walls/Wall_0006_close-Down-horizontal2.png');
+    }
+    .wall-HDL{
+        background-image: url('../components/assets/walls/Wall_0007_close-Down-horizontal1.png');
+    }
+    .wall-HDO{
+        background-image: url('../components/assets/walls/Wall_0016_horizontal-02.png');
+    }
+
+    
+    .wall-VLU{   /*  |  */
+        background-image: url('../components/assets/walls/Wall_0002_close-left-vertical2.png');
+    }
+    .wall-VLD{  
+        background-image: url('../components/assets/walls/Wall_0003_close-left-vertical1.png');
+    }
+    .wall-VLO{  
+        background-image: url('/../components/assets/walls/Wall_0019_diagonal-01.png');
+    }.wall-VRU{   /*  |  */
+        background-image: url('../components/assets/walls/Wall_0000_close-right-vertical2-copy.png');
+    }
+    .wall-VRD{  
+        background-image: url('../components/assets/walls/Wall_0001_close-right-vertical1-copy.png');
+    }
+    .wall-VRO{  
+        background-image: url('../components/assets/walls/Wall_0018_diagonal-02.png');
+    }
+
+
+
+
+    .none{
+        background-color: black;
+    }
+
+    .pill-s{
+        background-image: url('../components/assets/pills/_0001_logo-v2.png');
+    }
+    
+    .pill-b{
+        background-image: url('../components/assets/pills/_0000_Layer-1.png');
+    }
+
+
+
+
+
+
+    .wall-TLC{
+        background-image: url('../components/assets/walls/Wall_0010_close-L-shape2.png');
+    }.wall-TLO{
+        background-image: url('../components/assets/walls/Wall_0023_Corners1.png');
+    }
+
+    .wall-TRO{
+        background-image: url('../components/assets/walls/Wall_0022_Corners2.png');
+    }.wall-TRC{
+        background-image: url('../components/assets/walls/Wall_0011_close-L-shape1-copy.png');
+    }
+
+    .wall-DLO{
+        background-image: url('../components/assets/walls/Wall_0020_Corners4.png');
+    }.wall-DLC{
+        background-image: url('../components/assets/walls/Wall_0008_close-L-shape4.png');
+    }
+    
+    .wall-DRO{
+        background-image: url('../components/assets/walls/Wall_0021_Corners3.png');
+    }.wall-DRC{
+        background-image: url('../components/assets/walls/Wall_0009_close-L-shape3.png');
+    }
+
+
+
+
+
+
+    .wall-JU{
+        background-image: url('../components/assets/walls/Wall_0013_t-shape3.png');
+    }
+    .wall-JD{
+        background-image: url('../components/assets/walls/Wall_0015_t-shape1.png');
+    }
+    .wall-JL{
+        background-image: url('../components/assets/walls/Wall_0014_t-shape2.png');
+    }
+    .wall-JR{
+        background-image: url('../components/assets/walls/Wall_0012_t-shape4.png');
+    }
+    
+
+
+

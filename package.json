@@ -1,0 +1,29 @@
+{
+  "name": "pacmangame",
+  "version": "1.0.0",
+  "description": "a pacman online game",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "csv-parser": "^2.3.3",
+    "express": "^4.17.1",
+    "http": "^0.0.1-security",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.5",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "pacman",
+    "online",
+    "game"
+  ],
+  "author": "roobet",
+  "license": "ISC"
+}
