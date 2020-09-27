@@ -11,7 +11,7 @@
     
    
 
-    mongoose.connect('mongodb+srv://roo_user31:2QN5oyPFlcXv2HgN@rooman.a4rsd.mongodb.net/roomandb?retryWrites=true&w=majority',{ 
+    mongoose.connect('mongodb://localhost/roomandb',{ 
           useNewUrlParser: true,
           useUnifiedTopology: true
     })

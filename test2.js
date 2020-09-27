@@ -11,23 +11,22 @@
         }      
     }
 
-
-    function random_state_generator(chances){
-        var randomstates = new Array();
-        for(let ctr of range(10)){
-            randomstates.push( Math.round(Math.random()*chances) )
+    function* inverted_range(start,end=null,step=1){
+        let original_array = new Array()
+        for(let ctr of range(start,end,step)){
+            original_array.push(ctr)
         }
-        return randomstates
+        original_array.reverse()
+        for(let item of original_array){
+            yield item
+        }
     }
 
 
-    let chances = 15
-    console.log((random_state_generator(chances)))
-      
-
-
-
-
+    for(let ctr of inverted_range(1,10)){
+        console.log(ctr)
+    }
+    
 
 
 

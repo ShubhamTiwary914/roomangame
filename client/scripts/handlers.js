@@ -128,7 +128,7 @@
             })
             $('input').val('')
             $('.save-player-container').html(`
-                Your rank is ${rank} worldwide!
+                Your rank is ${rank+1} worldwide!
             `)
         })
 
@@ -137,6 +137,14 @@
             players_range_start +=10
             players_range_end += 10
             console.log(players_range_start)
+            fetch_top_players(top_sort_by)
+        })
+
+        $('#container').on('click','.filter-by-button',function(){
+            if(top_sort_by == 'score')
+                top_sort_by = 'level'
+            else
+                top_sort_by = 'score'
             fetch_top_players(top_sort_by)
         })
 
@@ -195,10 +203,14 @@
                     if(device_type == 'pc'){
                         $('.side-stats').hide()
                     }
+                    else{
+                        $('.lives-bar').hide()
+                    }
                     setTimeout(function(){
                         load_new_level()
                         clear_level('player')
                         $('.side-stats').show()
+                        $('.lives-bar').show()
                     },5000)
                 }
 
@@ -206,6 +218,9 @@
                     $('.side-stats-data').html(`
                         ${level_stats(player,true)}
                     `)
+                }
+                else if(device_type == 'phone'){
+                    $('.lives-bar').html(load_lives_bar(player))
                 }
 
             }if(enemies.length > 0){

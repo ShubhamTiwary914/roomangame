@@ -102,13 +102,22 @@
         left: 220px;
     }
 
+    .filter-by-button{
+        position: absolute;
+        display: inline-block;
+        top: 40px;
+        left: 600px;
+        width: 140px;
+        height: 40px;
+    }
+
     .top-players-container{
         font-size: 150%;
         color: white;
         display: block;
         position: absolute;
         top: 100px;
-        margin-left: 250px;
+        margin-left: 200px;
         word-spacing: 40px;
     }
 
@@ -171,13 +180,27 @@
         word-spacing: 20px;
     }
     .player-left-animate, .enemy-left-animate{
-        width: 25px;
-        height: 25px;
+        width: 20px;
+        height: 20px;
         background-size: 100%;
         position: absolute;
-    }.enemy-left-animate{
-        left: 300px;
     }
+    .player-left-animate{
+        top: 0px;
+        left: 400px;
+        background-image: url('../components/assets/player/Roo_0005_roo_0001_side1.png');
+        background-size: 100%;
+    }
+    .enemy-left-animate{
+        top: 0px;
+        left: 500px;
+        background-image: url('../components/assets/enemy/_0006_enemy-right-02.png');
+    }
+    .animated-pills{
+        margin-left: 5px;
+        position: absolute;
+    }
+
 
     .controls-animate{
         width: 50px;
@@ -265,6 +288,13 @@
         font-size: 120%;
     }.top-rest{
         margin-top: -70px;
+    }
+    .pill-3-home{
+        left: 50px;
+    }.pill-4-home{
+        left: 75px;
+    }.pill-5-home{
+        left: 100px;
     }
 
     .red-container, .pink-container,.blue-container,.orange-container{

@@ -31,6 +31,27 @@
         return p1
     }
 
+
+    function remove_animation_sprite_on_condition(player_animate_x,sprite_x,animation_sprite_class,type='run'){ //function to remove a animation  when x pos is 
+        if(type== 'run'){
+            if(player_animate_x <= sprite_x){
+                $(`.${animation_sprite_class}`).css('opacity','0')
+                return true
+            } return false
+                
+        }else{
+            if(player_animate_x >= sprite_x){
+                $(`.${animation_sprite_class}`).css('opacity','0')
+                return true
+            } return false
+        }
+
+        
+        
+            
+    }
+
+
     function start_scared_timer(player_object){  //player has eaten pill, start scared mode
         if(scared_timer != null){
             clearInterval(scared_timer)
@@ -111,6 +132,15 @@
         lives_imgs += '</div>'
         return lives_imgs
     }
+
+    function load_lives_bar(player_object){ //for mobile only
+        lives = player_object.lives;
+        let lives_imgs = ``
+        for(let ctr of range(lives)){
+            lives_imgs += `<div class='lives-img lives-img-${ctr}'></div>`
+        }
+        return lives_imgs
+    } 
 
     function level_stats(player_object,asynch=false){
         if(player_object.lives <= 0)

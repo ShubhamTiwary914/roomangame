@@ -23,11 +23,11 @@
                                         <div class='crown-container'></div>
                                     `
                         if(index == 0){
-                            $('.top-1').html(`Top 1. ${top_players[index].name}     ${top_players[index].score}`)
+                            $('.top-1').html(`Top1. ${top_players[index].name}     ${top_players[index].score}`)
                         }else if(index == 1){
-                            $('.top-2').html(`Top 2. ${top_players[index].name}   ${top_players[index].score}`)
+                            $('.top-2').html(`Top2. ${top_players[index].name}   ${top_players[index].score}`)
                         }else if(index == 2){
-                            $('.top-3').html(`Top 3. ${top_players[index].name}   ${top_players[index].score}`)
+                            $('.top-3').html(`Top3. ${top_players[index].name}   ${top_players[index].score}`)
                         }else{
                             $('.top-players-container').append(`${index+1}. ${top_players[index].name}   ${top_players[index].score}`)
                         }
@@ -41,11 +41,11 @@
                 else if(sortBy == 'level'){
                     if(index < 10){
                         if(index == 0){
-                            $('.top-1').html(`${index+1}. ${top_players[index].name}   ${top_players[index].level}`)
+                            $('.top-1').html(`Top1. ${top_players[index].name}   ${top_players[index].level}`)
                         }else if(index == 1){
-                            $('.top-2').html(`${index+1}. ${top_players[index].name}   ${top_players[index].level}`)
+                            $('.top-2').html(`Top2. ${top_players[index].name}   ${top_players[index].level}`)
                         }else if(index == 2){
-                            $('.top-3').html(`${index+1}. ${top_players[index].name}   ${top_players[index].level}`)
+                            $('.top-3').html(`Top3. ${top_players[index].name}   ${top_players[index].level}`)
                         }else{
                             $('.top-players-container').append(`${index+1}. ${top_players[index].name}   ${top_players[index].level}`)
                         }
@@ -70,6 +70,10 @@
     function fetch_top_players(sortBy='score'){
         $('#container').empty()
         $('#container').append($(`<div class='top-players-container'></div>`))
+        if(top_sort_by == 'score')
+            $('#container').append(`<button class='filter-by-button w3-btn w3-green'>Filter by: score</button>`)
+        else
+            $('#container').append(`<button class='filter-by-button w3-btn w3-green'>Filter by: level</button>`)
         $('.top-players-container').append(`<div class='top-1'></div>`)
         $('.top-players-container').append(`<div class='top-2'></div>`)
         $('.top-players-container').append(`<div class='top-3'></div>`)

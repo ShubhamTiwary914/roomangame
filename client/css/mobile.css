@@ -57,8 +57,9 @@
     }
     .home-animations-container{
         position: absolute;
-        margin-top: 170px;
-        margin-left: 220px;
+        margin-top: 400px;
+        margin-left: 40px;
+        display: inline-flex;
     }.home-animations-container div{
         display: block;
     }
@@ -79,11 +80,22 @@
         top: 53px;
         left: 60px;
         flex-wrap: wrap;
+
     }.lives-img{
         width: 20px;
         height: 20px;
+        margin-top: 3px;
         background-image: url('../components/assets/player/Roo_0003_roo_0001_side1-copy.png');
         background-size: 100%;
+    }
+
+    .lives-bar{
+        position: absolute;
+        z-index: 3;
+        display: block;
+        top: 20px;
+        left: 285px;
+        width: 25px;
     }
 
     .stats-container{
@@ -132,6 +144,16 @@
         margin-right: 30px;
         border: 1px solid white;
         align-items: center;
+    }
+
+    .filter-by-button{
+        position: absolute;
+        display: inline-block;
+        top: 30px;
+        left: 190px;
+        width: 130px;
+        height: 30px;
+        font-size: 85%;
     }
 
     .top-players-container{
@@ -234,15 +256,33 @@
 
 
     /*small */
+    #up,#down,#right,#left{
+        position: absolute;
+        z-index: 3;
+    }
+    #up{
+        top: -37px;
+        left: 100px;
+    }#down{
+        top: 5px;
+        left: 100px;
+    }#right{
+        top: -15px;
+        left: 150px;
+    }#left{
+        top: -15px;
+        left: 45px;
+    }
 
     .top-1{
-        font-size: 160%;
+        font-size: 120%;
     }
     .top-2{
-        font-size: 140%;
+        font-size: 110%;
     }.top-3{
-        font-size: 120%;
+        font-size: 100%;
     }.top-rest{
+        font-size: 90%;
         margin-top: -30px;
     }.top-none{
         font-size: 130%;

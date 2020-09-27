@@ -20,9 +20,7 @@
             set_mobile_display()
             set_mobile_settings()
         }
-        else{
-            set_pc_display()
-        }
+        home_animation()
     })
 
 
@@ -30,9 +28,15 @@
     function set_mobile_settings(){ //variables,controllers
         entity_dimensions = [20,20]
         container_dimenions = [320,480]
+        entity_speed = 4
+        player_original_speed = 4
+        player_boost_speed = 6
+
+        enemy_original_speed = 4
+        orange_scared_range = 5
 
 
-        player_default_position = [170,300]
+        player_default_position = [170,420]
         enemies_default_position = [
             [300,20],  //red
             [50,50],  //blue
@@ -60,6 +64,7 @@
 
     function get_mobile_controls(container_Id){
         $(`#${container_Id}`).append('<div class="control-buttons-container"></div>')
+        $('#container').append(`<div class='lives-bar'>${load_lives_bar(player)}</div>`)
         $('.control-buttons-container').append(`<button id='up' class='w3-btn w3-small'>&#8593</button>`)
         $('.control-buttons-container').append(`<button id='left' class='w3-btn w3-small'>&#8592</button>`)
         $('.control-buttons-container').append(`<button id='down' class='w3-btn w3-small'>&#8595</button>`)
@@ -68,73 +73,91 @@
 
 
 
-    function set_pc_display(){
+    function home_animation(){
         let player_animate_assets_left = ['components/assets/player/Roo_0005_roo_0001_side1.png','components/assets/player/Roo_0006_roo_0000_side2.png']
         let player_animate_assets_right = ['components/assets/player/Roo_0003_roo_0001_side1-copy.png','components/assets/player/Roo_0004_roo_0000_side2-copy.png']
-        let enemy_animate_assets_left = ['components/assets/enemy/_0006_enemy-right-02.png','components/assets/enemy/enemy_0007_enemy-right-01.png']
+        let enemy_animate_assets_left = ['components/assets/enemy/_0006_enemy-right-02.png','components/assets/enemy/_0007_enemy-right-01.png']
         let enemy_animate_assets_right = ['components/assets/enemy/enemy_scared_right.png','components/assets/enemy/enemy_scared_right2.png']
-        let counter = 0;
         let direction = 'left'
+        let player_animate_assets = player_animate_assets_left[0]
+        let enemy_animate_assets = enemy_animate_assets_left[0]
+        let entity_sprite_animate_index = 0
+        
+    
         setTimeout(function(){
-            setInterval(function(){
-                if(counter > 1)  counter = 0
-                if(direction == 'left'){
-                    $(`.player-left-animate`).css({
-                        'background-image': `url('${player_animate_assets_left[counter]}')`
-                   })
-                   $('.enemy-left-animate').css({
-                        'background-image': `url('${enemy_animate_assets_left[0]}')`
-                   })
+            for(let index of range(1,6)){
+                if(index == 1){
+                    $('.home-animations-container').append(`<div class='pill-b pill-${index}-home'></div>`)
                 }else{
-                    $(`.player-left-animate`).css({
-                        'background-image': `url('${player_animate_assets_right[counter]}')`
+                    $('.home-animations-container').append(`<div class='pill-s pill-${index}-home animated-pills'></div>`)
+                }
+            }
+            $('.home-animations-container').append(`<div class='player-left-animate'></div>`)
+            $('.home-animations-container').append(`<div class='enemy-left-animate'></div>`)
+            home_animation_timer = setInterval(() => {
+                
+                if(direction == 'left'){  //change velocity
+                    player_anime_loc[0] = player_anime_loc[0] - player_anime_speed
+                    enemy_anime_loc[0] = enemy_anime_loc[0] - enemy_anime_speed
+                }
+                else if(direction =='right'){
+                    player_anime_loc[0] = player_anime_loc[0] + player_anime_speed
+                    enemy_anime_loc[0] = enemy_anime_loc[0] + enemy_anime_speed
+                }
+                else{
+
+                }
+                    $('.player-left-animate').css({
+                        'left': `${player_anime_loc[0]}px`, //change and control animation attribute
+                        'background-image': `url('${player_animate_assets}')`
                     })
                     $('.enemy-left-animate').css({
-                        'background-image': `url('${enemy_animate_assets_right[counter]}')`
+                        'left': `${enemy_anime_loc[0]}px`,
+                        'background-image': `url('${enemy_animate_assets}')`
                     })
+
+                if($('#container .home-animations-container').length > 0){
+                    if($('.player-left-animate').css('left').slice(0,2) <= -1){   //change direction when a specific x is met
+                        direction = null
+                        setTimeout(function(){
+                            direction = 'right'
+                            enemy_anime_speed = 3
+                        },700)
+                    }
                 }
                 
-                counter++;
+               
+                for(let index of range(pills_anime.length)){
+                    pill_anime = pills_anime[index]
+                   remove_animation_sprite_on_condition(player_anime_loc[0],pill_anime[0],pill_anime[2],'run')
+                }
+                if(remove_animation_sprite_on_condition(player_anime_loc[0],enemy_anime_loc[0]-10,'enemy-left-animate','chase')){
+                    $('.player-left-animate').css({
+                        width: `${entity_dimensions[0]*2}px`,
+                        height: `${entity_dimensions[1]*2}px`
+                    })
+                }
+                remove_animation_sprite_on_condition(player_anime_loc[0],container_dimenions[0],'player-animate-left','chase')
+               
+                
+            },60);
+
+            home_animation_eat_timer = setInterval(function(){
+                if(entity_sprite_animate_index > 1) 
+                    entity_sprite_animate_index = 0
+                
+                if(direction == 'left'){
+                    player_animate_assets = player_animate_assets_left[entity_sprite_animate_index]
+                    enemy_animate_assets = enemy_animate_assets_left[entity_sprite_animate_index]
+                }else{
+                    player_animate_assets = player_animate_assets_right[entity_sprite_animate_index]
+                    enemy_animate_assets = enemy_animate_assets_right[entity_sprite_animate_index]
+                }
+                entity_sprite_animate_index++;
             },200)
-            
-            $(`.player-left-animate`).animate({    //move player and enemy to left
-                left:'-=300px'
-            },4000)
-            $(`.enemy-left-animate`).animate({    //move player and enemy to left
-                left:'-=200px'
-            },4000)
 
-            let timer = 2000     //delete pills 
-            for(let ctr of range(1,6)){
-                setTimeout(function(){
-                    $(`.pill-${ctr}-home`).remove()
-                },timer)
-                timer+=300
-            }
-            setTimeout(function(){
-                direction = 'right'
-            },3500)
-            
-            $(`.player-left-animate`).animate({  //move player and enemy to right
-                left:'+=700px'
-            },8000)
-            $(`.enemy-left-animate`).animate({  //move player and enemy to right
-                left:'+=300px'
-            },7000)
-
-            setTimeout(function(){
-                $(`.enemy-left-animate`).remove()
-                $(`.player-left-animate`).css({
-                    'width': '40px',
-                    'height':'40px',
-                })
-            },8000)
-
-            setTimeout(function(){
-                $(`.player-left-animate`).remove()
-            },9700)
-
-        },500)
+        },3000)
+        
         
     }
 

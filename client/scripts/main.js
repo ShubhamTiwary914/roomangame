@@ -20,8 +20,8 @@
     var player = null;     //player stats
     var player_spawn = new Array()
     var player_spawn_count = 0;
-    const player_original_speed = 5;
-    const player_boost_speed = 7;   
+    var player_original_speed = 5;
+    var player_boost_speed = 7;   
 
     var player_eat_score = 200;
     
@@ -29,9 +29,9 @@
     let enemies = new Array(); //enemy stats
     var enemies_spawn = new Array();
     var enemies_spawn_count = 0;
-    const enemy_original_speed = 5  
-    const enemy_scared_speed = 2
-    const orange_scared_range = 7
+    var enemy_original_speed = 5  
+    var enemy_scared_speed = 2
+    var orange_scared_range = 7
 
 
     var scared_timer = null   //timer stats 
@@ -40,7 +40,7 @@
     var player_asset_holder = 'eat'
 
     
-    let player_default_position = [450,560];  
+    let player_default_position = [350,560];  
     var enemies_default_position = [  //scatter pos
         [700,75],  //red
         [75,25],  //blue
@@ -49,10 +49,10 @@
     ];
 
     var enemies_spawn_position = [
-        [400,300],
-        [480,300],
-        [400,300],
-        [400,300]
+        [350,350],
+        [450,225],
+        [350,225],
+        [450,350]
     ]
     
 
@@ -146,6 +146,22 @@
     var top_sort_by = 'score'
 
 
+    //animation objects
+    let anime_y = 450
+    let player_anime_loc = [350,anime_y]
+    let enemy_anime_loc = [500,anime_y]
+    let player_anime_speed = 5;
+    let enemy_anime_speed = 5;
+    let pills_anime = [
+        [0,anime_y,'pill-1-home'],
+        [25,anime_y,'pill-2-home'],
+        [50,anime_y,'pill-3-home'],
+        [75,anime_y,'pill-4-home'],
+        [100,anime_y,'pill-5-home']
+    ]
+    let home_animation_timer = null; 
+    let home_animation_eat_timer = null;
+
     //style handlersdata
     var gameMode = 'main';
 
@@ -160,6 +176,19 @@
             yield i;
         }      
     }
+
+
+    function* inverted_range(start,end=null,step=1){
+        let original_array = new Array()
+        for(let ctr of range(start,end,step)){
+            original_array.push(ctr)
+        }
+        original_array.reverse()
+        for(let item of original_array){
+            yield item
+        }
+    }
+
 
     //find last index in array
     function find_lastIndex(arr){
