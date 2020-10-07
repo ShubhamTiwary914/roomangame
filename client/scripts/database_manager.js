@@ -23,11 +23,11 @@
                                         <div class='crown-container'></div>
                                     `
                         if(index == 0){
-                            $('.top-1').html(`Top1. ${top_players[index].name}     ${top_players[index].score}`)
+                            $('.top-1').html(`King ${top_players[index].name}     ${top_players[index].score}`)
                         }else if(index == 1){
-                            $('.top-2').html(`Top2. ${top_players[index].name}   ${top_players[index].score}`)
+                            $('.top-2').html(`Queen ${top_players[index].name}   ${top_players[index].score}`)
                         }else if(index == 2){
-                            $('.top-3').html(`Top3. ${top_players[index].name}   ${top_players[index].score}`)
+                            $('.top-3').html(`Ace ${top_players[index].name}   ${top_players[index].score}`)
                         }else{
                             $('.top-players-container').append(`${index+1}. ${top_players[index].name}   ${top_players[index].score}`)
                         }
@@ -41,11 +41,11 @@
                 else if(sortBy == 'level'){
                     if(index < 10){
                         if(index == 0){
-                            $('.top-1').html(`Top1. ${top_players[index].name}   ${top_players[index].level}`)
+                            $('.top-1').html(`King ${top_players[index].name}   ${top_players[index].level}`)
                         }else if(index == 1){
-                            $('.top-2').html(`Top2. ${top_players[index].name}   ${top_players[index].level}`)
+                            $('.top-2').html(`Queen ${top_players[index].name}   ${top_players[index].level}`)
                         }else if(index == 2){
-                            $('.top-3').html(`Top3. ${top_players[index].name}   ${top_players[index].level}`)
+                            $('.top-3').html(`Ace ${top_players[index].name}   ${top_players[index].level}`)
                         }else{
                             $('.top-players-container').append(`${index+1}. ${top_players[index].name}   ${top_players[index].level}`)
                         }
@@ -62,7 +62,7 @@
                 'margin-left': '-60px','margin-top':'200px'
             })
         }
-        
+
 
     }
 
@@ -108,13 +108,13 @@
     }
 
 
-    
 
 
 
 
 
-    
+
+
 
 
 

@@ -1,6 +1,6 @@
-  
 
-        
+
+
     /* Grid layouts and header container */
     body{
         background-color: black;
@@ -27,8 +27,8 @@
         height: 50px;
         margin: 5px;
         font-size: medium;
-        border-radius: 12px 12px 12px 12px; 
-    } 
+        border-radius: 12px 12px 12px 12px;
+    }
 
     .score{
         position: absolute;
@@ -211,14 +211,14 @@
     }.top-player-back{
         top: 450px;
     }
-        
+
     .player-container{
         position: absolute;
         display: inline-block;
         background-image: url('../components/assets/player/Roo_0001_roo_0003_front1.png');
         z-index: 1;
     }
-    
+
     .object-container{
         position: absolute;
         display: inline-block;
@@ -318,7 +318,7 @@
         height: 20px;
     }
 
-    
+
 
 
 

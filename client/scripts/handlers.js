@@ -7,15 +7,15 @@
                 $('#container').empty();
                 $('#container').append($(`<div class='player-container'></div>`))
                 gameMode = 'play';
-                
-                
 
-                if(enemies.length > 0){  
+
+
+                if(enemies.length > 0){
                     enemies = new Array()
                 }
                     enemies.push( new Red(enemies_spawn_position[0],'red-container',0) )
                     enemies.push( new Pink(enemies_spawn_position[1],'pink-container',1) )
-                    enemies.push( new Blue(enemies_spawn_position[2],'blue-container',2) )   
+                    enemies.push( new Blue(enemies_spawn_position[2],'blue-container',2) )
                     enemies.push( new Orange(enemies_spawn_position[3],'orange-container',3) )
                     $('#container').append($(`<div class='enemy-container red-container'></div>`))
                     $('#container').append($(`<div class='enemy-container blue-container'></div>`))
@@ -25,20 +25,20 @@
                     $('#container').append($(`<div class='target target-1'></div>`))
                     $('#container').append($(`<div class='target target-2'></div>`))
                     $('#container').append($(`<div class='target target-3'></div>`))
-                
+
                 create_new_gameplay_environment()
                 if(device_type == 'pc'){
                     gameplay_grid.request_environment(socket,'pc')
                     if(level == 0)
                         load_side_stats()
                 }
-                    
+
                 else{
                     gameplay_grid.request_environment(socket,'phone')
                     if(level == 0)
                         get_mobile_controls('container')
                 }
-                   
+
         }
 
         function load_level_display(display_type='level-up'){ //show level and all stats
@@ -55,13 +55,13 @@
                     else{
                         $('.level-container').css('left','10px')
                     }
-                        
+
                     $('.level-container').text(`Level ${level} Completed!`)
                     $('.stats-container').append((level_stats(player)))
                     if(device_type == 'phone'){
                         $('.stats-container').css('top','300px')
                     }
-                         
+
                 }
             }else{
                 if(device_type == 'phone'){
@@ -69,7 +69,7 @@
                 }
                 $('#container').append($(`<div class='over-container'>Score    <em>${player.score}</em></div>`))
                 $('.stats-container').append(get_total_stats(player,device_type))
-            } 
+            }
         }
 
 
@@ -81,7 +81,7 @@
                 player.pills_eaten_s = 0;
                 player.pills_eaten_b = 0;
                 player.enemies_eaten = 0;
-                
+
             }
             if(type=='env'){
                 player.pills_eaten = 0
@@ -96,7 +96,7 @@
                 empty_spaces = new Array()
                 empty_spaces_count = 0;
             }
-            
+
         }
 
 
@@ -116,7 +116,7 @@
             }else if($(this).attr('id')=='exit'){
                 load_exit()
             }
-            
+
         })
 
         $('#container').on('click','#save-player-button',function(){
@@ -136,7 +136,6 @@
         $('#container').on('click','.top-players-next',function(){
             players_range_start +=10
             players_range_end += 10
-            console.log(players_range_start)
             fetch_top_players(top_sort_by)
         })
 
@@ -164,7 +163,7 @@
         socket.on('receiveEnv',function(env_data){
             gameplay_grid.environment_array = environment_objects_to_array(env_data.env_array)
             gameplay_grid.draw_gameplay_environment()
-            total_pills = pills.length 
+            total_pills = pills.length
         });
 
 
@@ -186,16 +185,18 @@
                player.access_movement_event($(this).attr('id'),'mobile-controller')
             }
         })
-        
-    
+
+
         setInterval(function(){   // local clock-time cycle
             if(player != null){
-                player.x += player.velocity_x;
-                player.y += player.velocity_y;
+                if(!pause_game){
+                    player.x += player.velocity_x;
+                    player.y += player.velocity_y;
+                }
                 player.eat_pill_detector();
                 player.detect_boundaries();
                 player.draw_player();
-                
+
                 if(player.pills_eaten == total_pills){
                     clear_level()
                     level +=1
@@ -226,7 +227,6 @@
             }if(enemies.length > 0){
                 player_touch_enemy(player)
                 for(let index of range(enemies.length)){
-                   if(scared == false){
                         if(ghost_chaser == 'chaser'){
                             if(index == 0){
                                 enemies[index].chase_player([player.x,player.y])   //red
@@ -237,7 +237,8 @@
                             }else if(index == 3){
                                 enemies[index].chase_player([player.x,player.y],enemies_default_position[3])  //orange
                             }
-                        }else if(ghost_chaser == 'scatter'){  
+                        }
+                        else if(ghost_chaser == 'scatter'){
                             if(index == 0){
                                 enemies[index].scatter_enemy(enemies_default_position[0],0)   //red
                             }else if(index == 1){
@@ -248,26 +249,17 @@
                                 enemies[index].scatter_enemy(enemies_default_position[3],3)  //orange
                             }
                         }
-                   }else{
-                        if(index == 0){
-                            enemies[index].scatter_enemy(enemies_default_position[0],0)   //red
-                        }else if(index == 1){
-                            enemies[index].scatter_enemy(enemies_default_position[1],1)   //pink
-                        }else if(index == 2){
-                            enemies[index].scatter_enemy(enemies_default_position[2],2)  //blue
-                        }else if(index == 3){
-                            enemies[index].scatter_enemy(enemies_default_position[3],3)  //orange
-                        }
+
+                   if(!pause_game){
+                        enemies[index].x +=enemies[index].velocity_x;
+                        enemies[index].y +=enemies[index].velocity_y;
                    }
-                   
-                   enemies[index].x +=enemies[index].velocity_x;
-                   enemies[index].y +=enemies[index].velocity_y;        
-                   enemies[index].detect_boundaries(); 
+                   enemies[index].detect_boundaries();
                    enemies[index].draw_enemy();
 
                 }
-            }
-        },60)
+        }
+    },60)
 
         var game_event_loop = setInterval(function(){  //assets loader cycle and verifications
             if(player != null){
@@ -276,12 +268,15 @@
                 else
                     player_asset_holder = 'eat'
 
-                if(player.lives <= 0){ //player death 
+                if(player.lives <= 0){ //player death
                     clear_level()
+                    if(player.score <= 0){
+                        player.score = 10
+                    }
                     load_level_display('game-over')
                     $('.side-stats').remove()
                     clearInterval(game_event_loop)
-                } 
+                }
             }
         },player_eat_timer)
 

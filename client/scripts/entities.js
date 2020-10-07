@@ -1,5 +1,5 @@
 
-    
+
    class Entity{
         constructor(x,y,dimensions=entity_dimensions,velocity=entity_speed,starting_direction='up'){
             this.x = x;
@@ -36,23 +36,23 @@
                 }else if(direction == 'down'){
                     this.velocity_y = this.velocity;
                     this.velocity_x = 0;
-                   
+
                 }else if(direction == 'left'){
                     this.velocity_x = -this.velocity;
                     this.velocity_y = 0;
-                 
+
                 }else if(direction == 'right'){
                     this.velocity_x = this.velocity;
                     this.velocity_y = 0;
                 }
                 this.direction = direction;
-                if(player_asset_holder == 'eat'){ 
+                if(player_asset_holder == 'eat'){
                     set_asset('player-container',player_eat_assets,this.direction)
                 }else{
                     set_asset('player-container',player_assets,this.direction)
                 }
             }
-            
+
         }
 
         stop_moving(){
@@ -75,7 +75,7 @@
            let mid_point = get_mid_points([this.x,this.y],this.width)
            for(let wall_pos of walls_position){
               let mid_point_top = mid_point[0]
-              let mid_point_right = mid_point[1] 
+              let mid_point_right = mid_point[1]
               let mid_point_down = mid_point[2]
               let mid_point_left = mid_point[3]
               if( mid_point_top[0]>wall_pos[0] && mid_point_top[0]<wall_pos[0]+this.width && mid_point_top[1]>wall_pos[1] && mid_point_top[1]<wall_pos[1]+this.height){
@@ -110,7 +110,7 @@
             return true
         }
 
-       
+
 
    } //END class ENTITY
 
@@ -125,7 +125,7 @@
             this.assets = player_assets
             this.direction = 'right'
             this.lives = 4;
-            this.pills_eaten = 0; 
+            this.pills_eaten = 0;
             this.pills_eaten_s = 0;
             this.pills_eaten_b = 0;
             this.total_pills_eaten_s = 0;
@@ -148,7 +148,7 @@
             let player_pos_point = get_mid_points(player_pos,this.width,'this')
             let pl_x = player_pos_point[0]
             let pl_y = player_pos_point[1]
-        
+
             for(let pill of pills_position){
                 let pill_x = pill[0]
                 let pill_y = pill[1]
@@ -162,7 +162,7 @@
                             start_scared_timer(this)
                             this.pills_eaten_b++;
                             this.total_pills_eaten_b++;
-                        } 
+                        }
                         else{
                             this.pills_eaten_s++;
                             this.total_pills_eaten_s++;
@@ -183,7 +183,7 @@
                     height: this.height
                 })
             }
-            if(player_asset_holder == 'eat'){ 
+            if(player_asset_holder == 'eat'){
                 set_asset('player-container',player_eat_assets,this.direction)
             }else{
                 set_asset('player-container',player_assets,this.direction)
@@ -200,34 +200,35 @@
 
 
         access_movement_event(event,device='pc'){
-            if(device == 'pc'){
-                if(event.type == 'keydown'){
-                    let keyCode = event.which;  //w s a d   -y +y   -x +x   87  83   65  68
-                    if(keyCode == 87){
-                        this.change_direction('up')
-                    }else if(keyCode == 83){
-                        this.change_direction('down')
+            if(!pause_game){
+                if(device == 'pc'){
+                    if(event.type == 'keydown'){
+                        let keyCode = event.which;  //w s a d   -y +y   -x +x   87  83   65  68
+                        if(keyCode == 87){
+                            this.change_direction('up')
+                        }else if(keyCode == 83){
+                            this.change_direction('down')
+                        }
+                        else if(keyCode == 65){
+                            this.change_direction('left')
+                        }else if(keyCode == 68){
+                            this.change_direction('right')
+                        }
+                        else if(keyCode == 32){
+                            this.stop_moving();
+                            this.direction = null;
+                        }
                     }
-                    else if(keyCode == 65){
-                        this.change_direction('left')
-                    }else if(keyCode == 68){
-                        this.change_direction('right')
-                    }
-                    else if(keyCode == 32){
-                        this.stop_moving();
-                        this.direction = null;
-                    }
+                }else{
+                    this.change_direction(event)
                 }
-            }else{
-                this.change_direction(event)
             }
-           
         }
 
-        
+
 
 
 
     }  //END class PLAYER
 
-    
+

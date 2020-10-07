@@ -11,6 +11,7 @@
     // static entity data for global use
     let entity_dimensions = [25,25];
     var entity_speed = 5;
+    var pause_game = false
 
     var level = 0;  //level / modes stats
     var ghost_chaser = 'scatter'
@@ -21,26 +22,26 @@
     var player_spawn = new Array()
     var player_spawn_count = 0;
     var player_original_speed = 5;
-    var player_boost_speed = 7;   
+    var player_boost_speed = 7;
 
     var player_eat_score = 200;
-    
+
 
     let enemies = new Array(); //enemy stats
     var enemies_spawn = new Array();
     var enemies_spawn_count = 0;
-    var enemy_original_speed = 5  
+    var enemy_original_speed = 5
     var enemy_scared_speed = 2
     var orange_scared_range = 7
 
 
-    var scared_timer = null   //timer stats 
+    var scared_timer = null   //timer stats
     const scared_timer_count = 7000
     const player_eat_timer = 200
     var player_asset_holder = 'eat'
 
-    
-    let player_default_position = [350,560];  
+
+    let player_default_position = [350,560];
     var enemies_default_position = [  //scatter pos
         [700,75],  //red
         [75,25],  //blue
@@ -54,7 +55,7 @@
         [350,225],
         [450,350]
     ]
-    
+
 
     const player_assets ={
         'up': '../components/assets/player/Roo_0000_roo_0004_back1.png',
@@ -74,7 +75,7 @@
         'up': '../components/assets/enemy/_0000_enemyback-02.png',
         'down': '../components/assets/enemy/_0002_enemyfront-02.png',
         'left': '../components/assets/enemy/_0006_enemy-right-02.png',
-        'right': '../components/assets/enemy/_0004_enemy-left-02.png'  
+        'right': '../components/assets/enemy/_0004_enemy-left-02.png'
     }
 
     const enemy_scared_assets = {
@@ -83,7 +84,7 @@
         'left':  '../components/assets/enemy/enemy_scared_left.png',
         'right': '../components/assets/enemy/enemy_scared_right.png'
     }
-    
+
     //environments data
     let gridbox_dimensions = [...entity_dimensions];
     let container_dimenions = [800,600]
@@ -107,7 +108,7 @@
         '1RU': 'wall-VRU',
         '1RD':'wall-VRD',
         '1RO':'wall-VRO',
-        
+
         'U': 'wall-HUO',
         'UR': 'wall-HUR',
         'UL': 'wall-HUL',
@@ -159,7 +160,7 @@
         [75,anime_y,'pill-4-home'],
         [100,anime_y,'pill-5-home']
     ]
-    let home_animation_timer = null; 
+    let home_animation_timer = null;
     let home_animation_eat_timer = null;
 
     //style handlersdata
@@ -174,7 +175,7 @@
         }
         for(let i=start;i< end;i+=step){
             yield i;
-        }      
+        }
     }
 
 
@@ -197,7 +198,7 @@
                return arr[i];
             }
         }
-    }    
+    }
 
 
     function rotate_array(array_2d){
@@ -249,5 +250,5 @@
         return rotate_array(walls_positions);
 
     }
-    
+
 

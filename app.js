@@ -2,31 +2,33 @@
     const express = require('express');
     const serveStatic = require('serve-static');
     const app = express();
-    const mongoose = require('mongoose')
+
     const csv_parser = require('csv-parser');
     const fs = require('fs');
     const Server = require('http').Server(app);
     const Sockets = require(__dirname + '/server/sockets.js')['Socket'];
     const Player = require(__dirname + '/server/sockets.js')['Player'];
-    
-   
 
-    mongoose.connect('mongodb+srv://roo_user31:2QN5oyPFlcXv2HgN@rooman.a4rsd.mongodb.net/roomandb?retryWrites=true&w=majority',{ 
+
+
+     const mongoose = require('mongoose')
+    mongoose.connect('mongodb+srv://roo_user31:2QN5oyPFlcXv2HgN@rooman.a4rsd.mongodb.net/roomandb?retryWrites=true&w=majority',{
           useNewUrlParser: true,
           useUnifiedTopology: true
     })
     const db = mongoose.connection
     const Players = require(__dirname+'/server/models/players.js')
     var fetch_players = null;
-    
+
 
     db.once('open',() =>{
         console.log('Database Connection Established! ')
     })
 
+
     let socket_list =  require(__dirname + '/server/sockets.js')['socket_list']
     let filter_obj_arr =  require(__dirname + '/server/function_holders.js')['Filter_obj_arr']
-    
+
     //Routers
     app.get('/',async function(req,res){
         try{
@@ -38,7 +40,7 @@
     });
 
 
-    
+
 
 
     app.use('/', express.static(__dirname +'/client') );
@@ -60,10 +62,13 @@
                 id: socket_list.length
             })
 
+
             socket.emit('get_top_players',{
                 players: fetch_players,
             })
+
         })
+
 
         socket.on('save-player',async(player) =>{
             const new_player = new Players({
@@ -73,7 +78,8 @@
             })
             await new_player.save()
         })
-        
+
+
 
         socket.on('keepConnection',function(sock_data){
             for(let index=0; index < socket_list.length; index++){

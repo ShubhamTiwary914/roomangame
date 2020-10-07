@@ -32,13 +32,13 @@
     }
 
 
-    function remove_animation_sprite_on_condition(player_animate_x,sprite_x,animation_sprite_class,type='run'){ //function to remove a animation  when x pos is 
+    function remove_animation_sprite_on_condition(player_animate_x,sprite_x,animation_sprite_class,type='run'){ //function to remove a animation  when x pos is
         if(type== 'run'){
             if(player_animate_x <= sprite_x){
                 $(`.${animation_sprite_class}`).css('opacity','0')
                 return true
             } return false
-                
+
         }else{
             if(player_animate_x >= sprite_x){
                 $(`.${animation_sprite_class}`).css('opacity','0')
@@ -46,9 +46,9 @@
             } return false
         }
 
-        
-        
-            
+
+
+
     }
 
 
@@ -76,10 +76,10 @@
             player_eat_score = 200
         },scared_timer_count)
     }
-    
+
 
     function enemy_shift_chaser(){ //change scatter -> chase modes and so on (difficulty~level)
-        var chances = level+1;  
+        var chances = level+1;
         chances*=2
         if(level <= 3){
             chances = 8
@@ -100,6 +100,10 @@
                 if(player_pos[1] > enemies[index].y && player_pos[1] < enemies[index].y + entity_dimensions[1]){
                     if(scared == false){ //player dies
                         player_object.kill_player()
+                        pause_game = true
+                        setTimeout(()=>{
+                            pause_game = false
+                        },2000)
                     }else{  //enemy dies
                         enemies[index].kill_enemy(index)
                         player_object.enemies_eaten++;
@@ -109,6 +113,10 @@
                         if(player_eat_score >= 2000){
                             player_eat_score = 1600
                         }
+                        pause_game = true
+                        setTimeout(()=>{
+                            pause_game = false
+                        },500)
                     }
                 }
             }
@@ -118,7 +126,7 @@
     function player_eat(player_object){
         let direction = player_object.direction
         set_asset('player-container',player_eat_assets,direction)
-        setTimeout(function(){ 
+        setTimeout(function(){
             set_asset('player-container',player_assets,direction)
         },player_eat_timer)
     }
@@ -140,7 +148,7 @@
             lives_imgs += `<div class='lives-img lives-img-${ctr}'></div>`
         }
         return lives_imgs
-    } 
+    }
 
     function level_stats(player_object,asynch=false){
         if(player_object.lives <= 0)
