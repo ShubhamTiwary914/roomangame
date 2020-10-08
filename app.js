@@ -12,7 +12,7 @@
 
 
      const mongoose = require('mongoose')
-    mongoose.connect('mongodb+srv://roo_user31:2QN5oyPFlcXv2HgN@rooman.a4rsd.mongodb.net/roomandb?retryWrites=true&w=majority',{
+    mongoose.connect('<-- Create a mongo atlas cluster and PASTE API KEY HERE --> ',{
           useNewUrlParser: true,
           useUnifiedTopology: true
     })
