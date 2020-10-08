@@ -12,7 +12,7 @@
 
 
      const mongoose = require('mongoose')
-    mongoose.connect('<-- Create a mongo atlas cluster and PASTE API KEY HERE --> ',{
+    mongoose.connect('<-- Create a mongo Atlas Cluster and paste API key here -->',{
           useNewUrlParser: true,
           useUnifiedTopology: true
     })
